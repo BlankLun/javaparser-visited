@@ -2,8 +2,8 @@ package org.javaparser.examples.chapter4;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.comments.LineComment;
-import com.github.javaparser.printer.PrettyPrinter;
-import com.github.javaparser.printer.PrettyPrinterConfiguration;
+import com.github.javaparser.printer.DefaultPrettyPrinter;
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration;
 
 public class PrettyPrintComplete {
 
@@ -13,11 +13,8 @@ public class PrettyPrintComplete {
         myClass.setName("MyClass");
         myClass.addField("String", "foo");
 
-        PrettyPrinterConfiguration conf = new PrettyPrinterConfiguration();
-        conf.setIndentSize(1);
-        conf.setIndentType(PrettyPrinterConfiguration.IndentType.SPACES);
-        conf.setPrintComments(false);
-        PrettyPrinter prettyPrinter = new PrettyPrinter(conf);
+        DefaultPrinterConfiguration conf = new DefaultPrinterConfiguration();
+        DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter(conf);
         System.out.println(prettyPrinter.print(myClass));
     }
 }

@@ -2,12 +2,8 @@ package org.javaparser.examples.chapter4;
 
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.comments.LineComment;
-import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
-import com.github.javaparser.ast.expr.NormalAnnotationExpr;
-import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
-import com.github.javaparser.printer.PrettyPrintVisitor;
-import com.github.javaparser.printer.PrettyPrinter;
-import com.github.javaparser.printer.PrettyPrinterConfiguration;
+import com.github.javaparser.printer.DefaultPrettyPrinter;
+import com.github.javaparser.printer.configuration.DefaultPrinterConfiguration;
 
 public class PrettyPrintVisitorComplete {
 
@@ -18,29 +14,8 @@ public class PrettyPrintVisitorComplete {
         myClass.addField("String", "foo");
         myClass.addAnnotation("MySecretAnnotation");
 
-        PrettyPrinterConfiguration conf = new PrettyPrinterConfiguration();
-        conf.setIndentSize(2);
-        conf.setIndentType(PrettyPrinterConfiguration.IndentType.SPACES);
-        conf.setPrintComments(false);
-        conf.setVisitorFactory(prettyPrinterConfiguration -> new PrettyPrintVisitor(conf) {
-
-            @Override
-            public void visit(MarkerAnnotationExpr n, Void arg) {
-                // ignore
-            }
-
-            @Override
-            public void visit(SingleMemberAnnotationExpr n, Void arg) {
-                // ignore
-            }
-
-            @Override
-            public void visit(NormalAnnotationExpr n, Void arg) {
-                // ignore
-            }
-
-        });
-        PrettyPrinter prettyPrinter = new PrettyPrinter(conf);
+        DefaultPrinterConfiguration conf = new DefaultPrinterConfiguration();
+        DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter(conf);
         System.out.println(prettyPrinter.print(myClass));
     }
 
